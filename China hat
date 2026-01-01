@@ -18,7 +18,7 @@ local function createChinaHat(character)
 	local hat = Instance.new("Part")
 	hat.Name = "Handle"
 	hat.Size = Vector3.new(7, 3, 7)
-	hat.Color = Color3.fromRGB(78,87,84)
+	hat.Color = Color3.fromRGB(120,219,226)
 	hat.Transparency = 0.4
 	hat.Material = Enum.Material.SmoothPlastic
 	hat.CanCollide = false
