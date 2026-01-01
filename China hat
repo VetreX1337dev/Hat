@@ -1,0 +1,56 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function createChinaHat(character)
+	local head = character:WaitForChild("Head")
+
+	-- защита от дубликатов
+	if character:FindFirstChild("ChinaHat") then
+		return
+	end
+
+	-- МОДЕЛЬ
+	local model = Instance.new("Model")
+	model.Name = "ChinaHat"
+	model.Parent = character
+
+	-- ОСНОВА
+	local hat = Instance.new("Part")
+	hat.Name = "Handle"
+	hat.Size = Vector3.new(7, 3, 7)
+	hat.Color = Color3.fromRGB(255, 0, 0)
+	hat.Transparency = 0.4
+	hat.Material = Enum.Material.SmoothPlastic
+	hat.CanCollide = false
+	hat.Anchored = false
+	hat.Massless = true
+	hat.Parent = model
+
+	-- КОНУС
+	local mesh = Instance.new("SpecialMesh")
+	mesh.MeshType = Enum.MeshType.FileMesh
+	mesh.MeshId = "rbxassetid://1033714"
+	mesh.Scale = Vector3.new(2.0, 1.3, 2.0)
+	mesh.Parent = hat
+
+	
+	hat.CFrame = head.CFrame * CFrame.new(0, 0.9, 0)
+
+	-- КРЕПЛЕНИЕ
+	local weld = Instance.new("WeldConstraint")
+	weld.Part0 = hat
+	weld.Part1 = head
+	weld.Parent = hat
+end
+
+-- ПОДКЛЮЧЕНИЕ
+local function onCharacterAdded(character)
+	task.wait(0.2)
+	createChinaHat(character)
+end
+
+if player.Character then
+	onCharacterAdded(player.Character)
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
